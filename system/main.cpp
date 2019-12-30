@@ -33,8 +33,8 @@ int main(int argc, char* argv[])
 	string dir;
 	char hostname[256];
 	gethostname(hostname, 256);
-	if (strncmp(hostname, "draco", 5) == 0)
-		dir = "/data/scratch/yxy/DBx1000-taurus/";
+	if (strncmp(hostname, "optane", 6) == 0)
+		dir = "/mnt/pmem0/stamp/DBx1000/";
 	else
 		dir = "./";
   	

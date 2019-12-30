@@ -1,10 +1,10 @@
 CC=g++
-CFLAGS=-Wall -g -std=c++0x
+CFLAGS=-Wall -g -std=c++0x -Wno-misleading-indentation -no-pie
 
 .SUFFIXES: .o .cpp .h
 
 SRC_DIRS = ./ ./benchmarks/ ./concurrency_control/ ./storage/ ./system/
-INCLUDE = -I. -I./benchmarks -I./concurrency_control -I./storage -I./system -I./include
+INCLUDE = -I. -I./benchmarks -I./concurrency_control -I./storage -I./system
 
 CFLAGS += $(INCLUDE) -D NOGRAPHITE=1 -Werror -O3 -D_GNU_SOURCE
 LDFLAGS = -Wall -L. -L./libs -g -ggdb -std=c++0x -O3 -pthread  -lrt -ljemalloc 

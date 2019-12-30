@@ -16,7 +16,7 @@
 // # of transactions to run for warmup
 #define WARMUP						0
 // YCSB or TPCC
-#define WORKLOAD YCSB
+#define WORKLOAD 					YCSB
 // print the transaction latency distribution
 #define PRT_LAT_DISTR				false
 #define STATS_ENABLE				true
@@ -91,6 +91,8 @@
 #define VALIDATION_LOCK				"no-wait" // no-wait or waiting
 #define PRE_ABORT					true
 #define ATOMIC_WORD					true 
+// [SILO]
+#define EPOCH_PERIOD				5 // ms
 // [HSTORE]
 // when set to true, hstore will not access the global timestamp.
 // This is fine for single partition transactions. 
@@ -101,20 +103,24 @@
 /***********************************************/
 // Logging
 /***********************************************/
-#define LOG_ALGORITHM LOG_NO
-#define LOG_TYPE LOG_DATA
+#define LOG_ALGORITHM 				LOG_PARALLEL
+#define LOG_TYPE 					LOG_DATA
 #define LOG_RAM_DISK				false
 #define LOG_NO_FLUSH			 	false
-#define LOG_RECOVER false
+#define LOG_RECOVER 				false
 #define LOG_BATCH_TIME				10 // in ms
-#define LOG_GARBAGE_COLLECT false
+#define LOG_GARBAGE_COLLECT 		false
 #define LOG_BUFFER_SIZE				(1048576 * 50)	// in bytes
 // For LOG_PARALLEL
 #define LOG_PARALLEL_BUFFER_FILL	false 
 #define NUM_LOGGER					4 
-#define LOG_PARALLEL_NUM_BUCKETS    4000000	// should equal the number of recovered txns
-#define MAX_LOG_ENTRY_SIZE			16384 // in Bytes
-#define LOG_FLUSH_INTERVAL   		5000 // in us. 
+#define LOG_PARALLEL_NUM_BUCKETS    5000000	// should equal the number of recovered txns
+#define MAX_LOG_ENTRY_SIZE			8192 // in Bytes
+#define LOG_FLUSH_INTERVAL   		5000 // in us.
+#define TRACK_WAR_DEPENDENCY		true // necessary only for logical or command logging.  
+#define LOG_PARALLEL_REC_NUM_POOLS  THREAD_CNT 
+#define LOG_CHUNK_SIZE  			(1048576 * 10)
+#define NEXT_TXN_OPT				true
 /***********************************************/
 // Benchmark
 /***********************************************/
