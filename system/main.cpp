@@ -34,7 +34,7 @@ int main(int argc, char* argv[])
 	char hostname[256];
 	gethostname(hostname, 256);
 	if (strncmp(hostname, "optane", 6) == 0)
-		dir = "/mnt/pmem0/stamp/DBx1000/";
+		dir = "/mnt/pmem0/stamp/DBx1000/workdir";
 	else
 		dir = "./";
   	
