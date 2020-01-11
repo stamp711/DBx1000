@@ -2,3 +2,9 @@
 *.d
 bin/
 results/
+
+.vscode
+config.h
+rundb*
+
+__pycache__/
