@@ -140,7 +140,7 @@
 #define SCAN_LEN					20
 #define PART_PER_TXN 				1
 #define PERC_MULTI_PART				1
-#define REQ_PER_QUERY				2 
+#define REQ_PER_QUERY				10
 #define FIELD_PER_TUPLE				10
 // ==== [TPCC] ====
 // For large warehouse count, the tables do not fit in memory
