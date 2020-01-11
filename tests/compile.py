@@ -25,6 +25,7 @@ def compile(job_name, job_config):
         print(job_config)
         exit(-1)
     else:
+        os.system("rm config.h")
         os.system("mv rundb bin/rundb_" + job_name)
 
 
