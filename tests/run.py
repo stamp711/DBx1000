@@ -10,15 +10,23 @@ def run(job_name, cnt):
     sum_latency = 0.0
 
     for i in range(0, cnt):
-        # Remove old DB files
-        if platform.node() == "optane":
-            shutil.rmtree(optane_workdir, ignore_errors=True)
-            os.makedirs(optane_workdir, exist_ok=True)
-        else:
-            os.system("rm *_log*.log* > /dev/null 2>&1")
-        # Run once
-        log_file = "results/" + job_name + "_" + str(i)
-        os.system("./bin/rundb_" + job_name + " > " + log_file)
+        ok = False
+        run = 0
+
+        while (not ok) and run < 5:
+            run += 1
+            # Remove old DB files
+            if platform.node() == "optane":
+                shutil.rmtree(optane_workdir, ignore_errors=True)
+                os.makedirs(optane_workdir, exist_ok=True)
+            else:
+                os.system("rm *_log*.log* > /dev/null 2>&1")
+
+            # Take a successful run
+            log_file = "results/" + job_name + "_" + str(i)
+            ret = os.system("./bin/rundb_" + job_name + " > " + log_file)
+            ok = ret == 0
+
         throughput, latency = parse(log_file)
         print("   " + str(i) + ":", throughput, latency)
         # Incr counter
