@@ -108,7 +108,14 @@ void Stats::output(std::ostream * os)
 	out << "=Worker Thread=" << endl;
 	out << "    " << setw(30) << left << "Throughput:"
 		<< BILLION * total_num_commits / total_run_time * g_thread_cnt << endl;
-	// print floating point stats
+
+    double avg_latency = 0;
+    for (uint32_t tid = 0; tid < _total_thread_cnt; tid++)
+		avg_latency += _stats[tid]->_float_stats[STAT_latency];
+    avg_latency /= total_num_commits;
+    out << "    " << setw(30) << left << "Average_Latency:" << avg_latency / BILLION * 1000 * 1000 << endl;
+
+    // print floating point stats
 	for	(uint32_t i = 0; i < NUM_FLOAT_STATS; i++) {
 		double total = 0;
 		for (uint32_t tid = 0; tid < _total_thread_cnt; tid ++) 

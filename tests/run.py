@@ -40,7 +40,7 @@ def parse(file):
     for line in open(file):
         if "Throughput:" in line:
             throughput = float(line.split()[1])
-        if "latency:" in line:
+        if "Average_Latency:" in line:
             latency = float(line.split()[1])
     return (throughput, latency)
 
